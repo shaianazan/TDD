@@ -59,11 +59,19 @@ public class BoletoTest {
 	}
 	
 	
-	
-	
-	
+	@DisplayName("Testar boletos pagos com valor igual ao da fatura")
+	@Test
+	public void testaPagamentoMesmoValor() {
+		listaBoletos.add(new Boleto("111101", new Date(), 1000.00));
+		listaBoletos.add(new Boleto("111101", new Date(), 500.00));
 
 
+		Assertions.assertEquals(StatusFatura.CLOSED, processadorBoleto.processPayment(fatura, listaBoletos).getStatus());
+	}
+	
+	
+	
+	
 
 
 }
