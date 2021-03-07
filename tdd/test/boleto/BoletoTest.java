@@ -55,7 +55,7 @@ public class BoletoTest {
 		listaBoletos.add(new Boleto("111101", new Date(), 500.00));
 
 
-		Assertions.assertEquals(StatusFatura.CLOSED, processadorBoleto.processPayment(fatura, listaBoletos).getStatus());
+		Assertions.assertEquals(StatusFatura.FECHADA, processadorBoleto.processPayment(fatura, listaBoletos).getStatus());
 	}
 	
 	
@@ -66,12 +66,20 @@ public class BoletoTest {
 		listaBoletos.add(new Boleto("111101", new Date(), 500.00));
 
 
-		Assertions.assertEquals(StatusFatura.CLOSED, processadorBoleto.processPayment(fatura, listaBoletos).getStatus());
+		Assertions.assertEquals(StatusFatura.FECHADA, processadorBoleto.processPayment(fatura, listaBoletos).getStatus());
 	}
 	
 	
-	
-	
+	@DisplayName("Testar boletos pagos com valor menor que o da fatura")
+	@Test
+	public void testaPagamentoMenor() {
+		listaBoletos.add(new Boleto("111101", new Date(), 1000.00));
+		listaBoletos.add(new Boleto("111101", new Date(), 200.00));
+
+
+		Assertions.assertEquals(StatusFatura.ABERTA, processadorBoleto.processPayment(fatura, listaBoletos).getStatus());
+	}
+
 
 
 }
