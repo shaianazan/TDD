@@ -5,17 +5,17 @@ import java.util.Date;
 
 public class ProcessadorBoleto {
 
-	public fatura processaPagamento(Fatura fatura, ArrayList<Boleto> boleto) {
-		fatura.setListaPagamento(getListaPagamento(boleto));
+	public Fatura processaPagamento(Fatura fatura, ArrayList<Boleto> boleto) {
+		fatura.setListaPagamento(getListaPagamento1(boleto));
 
 		fatura.setStatus(
-				getSomaPagamentos(fatura.getListaPagamento()) >= fatura.getValorTotal() ? FaturaStatus.CLOSED
-						: FaturaStatus.OPEN);
+				getSomaPagamentos(fatura.getListaPagamento()) >= fatura.getValorTotal() ? Status.FECHADA
+						: Status.ABERTA);
 
 		return fatura;
 	}
 
-	public ArrayList<Pagamento> getListaPagamento(ArrayList<Boleto> listaBoletos) {
+	public ArrayList<Pagamento> getListaPagamento1(ArrayList<Boleto> listaBoletos) {
 		ArrayList<Pagamento> listaPagamento = new ArrayList<Pagamento>();
 
 		for (Boleto boleto : listaBoletos)
@@ -28,7 +28,7 @@ public class ProcessadorBoleto {
 		double valorTotal = 0;
 
 		for (Pagamento pagamento : listaPagamento)
-			valorTotal += pagamento.getValorPago();
+			valorTotal += pagamento.getValor();
 
 		return valorTotal;
 	}
