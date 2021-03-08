@@ -14,14 +14,14 @@ public class Fatura {
 	private ArrayList<Pagamento> listaPagamento;
 	
 	
-	public Fatura(Date data, double valorTotal, String nome) {
+	public Fatura(Date data, String nome, double valorTotal) {
 		
 		super();
 		this.valorTotal = valorTotal;
 		this.data = data;
 		this.nome = nome;
 		this.listaPagamento = new ArrayList<Pagamento>();
-		this.status = Status.OPEN;
+		this.status = Status.ABERTA;
 	}
 
 	public Fatura(Date data, double valorTotal, String nome, ArrayList<Pagamento> listaPagamento,

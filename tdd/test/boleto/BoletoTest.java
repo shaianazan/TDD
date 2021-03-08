@@ -32,18 +32,18 @@ public class BoletoTest {
 	
 	@DisplayName("Testar a soma dos pagamentos")
 	@Test
-	public void testGetSumPaymentsValue() {
+	public void testSomaPagamentos() {
 		double expected = 0;
 		listaBoletos.add(new Boleto("111101", new Date(), 1000.00));
 		listaBoletos.add(new Boleto("111101", new Date(), 1000.00));
 
 		for (Boleto boleto : listaBoletos) {
-			expected += boleto.getValue();
+			expected += boleto.getValor();
 		}
 
-		ArrayList<Pagamento> paymentList = processadorBoleto.getPaymentList(listaBoletos);
+		ArrayList<Pagamento> listaPagamento = processadorBoleto.getListaPagamento(listaBoletos);
 
-		Assertions.assertEquals(expected, processadorBoleto.getSumPaymentsValue(listaBoletos));
+		Assertions.assertEquals(expected, processadorBoleto.getSomaPagamentos(listaBoletos));
 	}
 	
 	
@@ -55,7 +55,7 @@ public class BoletoTest {
 		listaBoletos.add(new Boleto("111101", new Date(), 500.00));
 
 
-		Assertions.assertEquals(StatusFatura.FECHADA, processadorBoleto.processPayment(fatura, listaBoletos).getStatus());
+		Assertions.assertEquals(Status.FECHADA, processadorBoleto.processaPagamento(fatura, listaBoletos).getStatus());
 	}
 	
 	
@@ -66,7 +66,7 @@ public class BoletoTest {
 		listaBoletos.add(new Boleto("111101", new Date(), 500.00));
 
 
-		Assertions.assertEquals(StatusFatura.FECHADA, processadorBoleto.processPayment(fatura, listaBoletos).getStatus());
+		Assertions.assertEquals(Status.FECHADA, processadorBoleto.processaPagamento(fatura, listaBoletos).getStatus());
 	}
 	
 	
@@ -77,7 +77,7 @@ public class BoletoTest {
 		listaBoletos.add(new Boleto("111101", new Date(), 200.00));
 
 
-		Assertions.assertEquals(StatusFatura.ABERTA, processadorBoleto.processPayment(fatura, listaBoletos).getStatus());
+		Assertions.assertEquals(Status.ABERTA, processadorBoleto.processaPagamento(fatura, listaBoletos).getStatus());
 	}
 
 
